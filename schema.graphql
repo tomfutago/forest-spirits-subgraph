@@ -1,33 +1,100 @@
-type AncestralSeedlingMint @entity {
+type _Schema_
+  @fulltext(
+    name: "spiritSearch"
+    language: en
+    algorithm: rank
+    include: [{
+      entity: "ForestSpirit",
+      fields: [
+        { name: "name" }, { name: "body" }, { name: "mask" }, { name: "staff" }, { name: "element" },
+        { name: "pedestal" }, { name: "environment" }, { name: "ancestor" }, { name: "origin" }
+      ]
+    }]
+  )
+
+type Project @entity {
   id: ID!
-  spiritId: BigInt! # uint256
-  bonsaiType: Bytes! # address
-  bonsaiId: BigInt! # uint256
+  name: String!
+  symbol: String!
+  totalMinted: BigInt!
+  totalSales: BigInt!
+  totalTransfers: BigInt!
+  totalSalesWei: BigInt!
+  avgSaleWei: BigInt!
+  nfts: [ForestSpirit!]! @derivedFrom(field: "project")
+  sales: [SaleEvent!]! @derivedFrom(field: "project")
+  transfers: [TransferEvent!]! @derivedFrom(field: "project")
+  buyers: [Account!]!
+  sellers: [Account!]!
 }
 
-type Approval @entity {
+type Account @entity {
   id: ID!
-  owner: Bytes! # address
-  approved: Bytes! # address
-  tokenId: BigInt! # uint256
+  totalBought: BigInt!
+  totalBoughtWei: BigInt!
+  totalSold: BigInt!
+  totalSoldWei: BigInt!
+  avgBoughtWei: BigInt!
+  avgSoldWei: BigInt!
+  totalSent: BigInt!
+  totalReceived: BigInt!
+  nft: [ForestSpirit!] @derivedFrom(field: "currentOwner")
+  sold: [SaleEvent!]! @derivedFrom(field: "from")
+  bought: [SaleEvent!]! @derivedFrom(field: "to")
+  sent: [TransferEvent!]! @derivedFrom(field: "from")
+  received: [TransferEvent!]! @derivedFrom(field: "to")
 }
 
-type ApprovalForAll @entity {
+type ForestSpirit @entity {
   id: ID!
-  owner: Bytes! # address
-  operator: Bytes! # address
-  approved: Boolean! # bool
+  project: Project!
+  currentOwner: Account!
+  totalSales: BigInt!
+  totalSalesWei: BigInt!
+  avgSaleWei: BigInt!
+  totalTransfers: BigInt!
+  sales: [SaleEvent!]! @derivedFrom(field: "nft")
+  transfers: [TransferEvent!]! @derivedFrom(field: "nft")
+  block: BigInt!
+  hash: Bytes!
+  timestamp: BigInt!
+  tokenID: BigInt!
+  tokenURI: String!
+  image: String!
+  animation_url: String!
+  name: String!
+  body: String
+  mask: String
+  staff: String
+  element: String
+  pedestal: String
+  environment: String
+  ancestor: String
+  origin: String
 }
 
-type OwnershipTransferred @entity {
+type TransferEvent @entity {
   id: ID!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
+  idx: BigInt!
+  project: Project!
+  nft: ForestSpirit!
+  from: Account!
+  to: Account!
+  block: BigInt!
+  hash: Bytes!
+  timestamp: BigInt!
+  isMint: Boolean
 }
 
-type Transfer @entity {
+type SaleEvent @entity {
   id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  tokenId: BigInt! # uint256
+  idx: BigInt!
+  project: Project!
+  nft: ForestSpirit!
+  amount: BigInt!
+  from: Account!
+  to: Account!
+  block: BigInt!
+  hash: Bytes!
+  timestamp: BigInt!
 }

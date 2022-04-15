@@ -1,67 +1,71 @@
-import {
-  AncestralSeedlingMint as AncestralSeedlingMintEvent,
-  Approval as ApprovalEvent,
-  ApprovalForAll as ApprovalForAllEvent,
-  OwnershipTransferred as OwnershipTransferredEvent,
-  Transfer as TransferEvent
-} from "../generated/Token/Token"
-import {
-  AncestralSeedlingMint,
-  Approval,
-  ApprovalForAll,
-  OwnershipTransferred,
-  Transfer
-} from "../generated/schema"
-
-export function handleAncestralSeedlingMint(
-  event: AncestralSeedlingMintEvent
-): void {
-  let entity = new AncestralSeedlingMint(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.spiritId = event.params.spiritId
-  entity.bonsaiType = event.params.bonsaiType
-  entity.bonsaiId = event.params.bonsaiId
-  entity.save()
-}
-
-export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.owner = event.params.owner
-  entity.approved = event.params.approved
-  entity.tokenId = event.params.tokenId
-  entity.save()
-}
-
-export function handleApprovalForAll(event: ApprovalForAllEvent): void {
-  let entity = new ApprovalForAll(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.owner = event.params.owner
-  entity.operator = event.params.operator
-  entity.approved = event.params.approved
-  entity.save()
-}
-
-export function handleOwnershipTransferred(
-  event: OwnershipTransferredEvent
-): void {
-  let entity = new OwnershipTransferred(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.previousOwner = event.params.previousOwner
-  entity.newOwner = event.params.newOwner
-  entity.save()
-}
+import { Transfer as TransferEvent } from "../generated/Token/Token";
+import { ForestSpirit, Project } from "../generated/schema";
+import { ZERO, ZERO_ADDRESS } from "./utils/constants";
+import * as projects from "./entities/projects";
+import * as accounts from "./entities/accounts";
+import * as nfts from "./entities/nfts";
+import * as saleEvents from "./entities/saleEvents";
+import * as transferEvents from "./entities/transferEvents";
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.tokenId = event.params.tokenId
-  entity.save()
+  /***** get Event details *****/
+  let address = event.address;
+  let tokenId = event.params.tokenId;
+  let from = event.params.from;
+  let to = event.params.to;
+  let amount = event.transaction.value;
+  let block = event.block.number;
+  let hash = event.transaction.hash;
+  let timestamp = event.block.timestamp;
+
+  /***** Project *****/
+  let project = projects.get(address);
+  // sale
+  if (from.toHexString() != ZERO_ADDRESS) {
+    let seller = accounts.get(from);
+    let buyer = accounts.get(to);
+    projects.addSeller(project as Project, seller);
+    projects.addBuyer(project as Project, buyer);
+  }
+  project.save();
+
+  /***** Account *****/
+  let fromAccount = accounts.get(from);
+  let toAccount = accounts.get(to);
+  
+  /***** NFT *****/
+  let spirit = nfts.get(
+    tokenId.toString(),
+    address,
+    tokenId,
+    block,
+    hash,
+    timestamp,
+    to
+  );
+
+  /***** Sale Event *****/
+  if (from.toHexString() != ZERO_ADDRESS && amount.gt(ZERO)) {
+    saleEvents.create(
+      spirit as ForestSpirit,
+      project as Project,
+      fromAccount,
+      toAccount,
+      amount,
+      block,
+      hash,
+      timestamp
+    );
+  }
+
+  /***** Transfer Event *****/
+  transferEvents.create(
+    spirit as ForestSpirit,
+    project as Project,
+    fromAccount,
+    toAccount,
+    block,
+    hash,
+    timestamp
+  );
 }

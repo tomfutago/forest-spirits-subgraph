@@ -1,0 +1,90 @@
+https://ipfs.io/ipfs/QmeP3gk6gyRB55NQ6nyhxdSiZ7S7e4EG9dZpNhcsbvL7A1/1
+
+{
+    "name": "Forest Spirit #1",
+    "image": "ipfs://QmR43AkgZRSCGHgiiBibo6v5JyC31ArgqgC1z1kCvzanWS/1.png",
+    "animation_url": "ipfs://QmSXh1yob3e9a8xuZ7ejiGarSWSp4Wk3P3j43dRyMXo4hp/1.mp4",
+    "attributes": [
+        {
+            "trait_type": "Body",
+            "value": "Split Cedar"
+        },
+        {
+            "trait_type": "Mask",
+            "value": "Mushi-Me"
+        },
+        {
+            "trait_type": "Staff",
+            "value": "Spirit Tether"
+        },
+        {
+            "trait_type": "Element",
+            "value": "Water"
+        },
+        {
+            "trait_type": "Pedestal",
+            "value": "Birch Stump"
+        },
+        {
+            "trait_type": "Environment",
+            "value": "Red Maple Forest"
+        }
+    ],
+    "profile": "ipfs://QmePtCoqN38cciUqui9MnELkAziyfvqFqTwAU5wNxZrfsw/1.png",
+    "glb": "ipfs://QmbTVt8vrgNjtscCJMsJSn3nrp66aq4H4PSDTdFf4ShEPD/1.glb",
+    "fbx": "ipfs://QmSWFu6eNbqmsQSSefb6XxcoY7m1rMHGQm3mCf8G4wfguc/1.fbx",
+    "usdz": "ipfs://QmNxDdNSC1DtfrMKhfCVc3NQsWUq2sLcQTHxzVj9vDoAyQ/1.usdz",
+    "day": "ipfs://Qme5qA9a4vD5wvsHksB9HVud3LaZaPS7UkHhZDmTQzpg8q/1.png",
+    "night": "ipfs://QmUwxSuUb3A8taAhK5haYraiScMAqtMbLmNEzV8VRSpRkS/1.png",
+    "description": "We are pleased to include the following files with this Forest Spirit:\n\n\n📷 [Profile Picture - PNG](https://ipfs.io/ipfs/QmePtCoqN38cciUqui9MnELkAziyfvqFqTwAU5wNxZrfsw/1.png)\n\n\n🖼 [Hero Art - PNG](https://ipfs.io/ipfs/QmR43AkgZRSCGHgiiBibo6v5JyC31ArgqgC1z1kCvzanWS/1.png)\n\n\n🎬 [Hero Animation - MP4](https://ipfs.io/ipfs/QmSXh1yob3e9a8xuZ7ejiGarSWSp4Wk3P3j43dRyMXo4hp/1.mp4)\n\n\n☀️ [Bonsai Studio Day - PNG](https://ipfs.io/ipfs/Qme5qA9a4vD5wvsHksB9HVud3LaZaPS7UkHhZDmTQzpg8q/1.png)\n\n\n🌙 [Bonsai Studio Night - PNG](https://ipfs.io/ipfs/QmUwxSuUb3A8taAhK5haYraiScMAqtMbLmNEzV8VRSpRkS/1.png)\n\n\n🌐 [Idle Animation - GLB](https://ipfs.io/ipfs/QmbTVt8vrgNjtscCJMsJSn3nrp66aq4H4PSDTdFf4ShEPD/1.glb)\n\n\n🌐 [Idle Animation - USDZ](https://ipfs.io/ipfs/QmNxDdNSC1DtfrMKhfCVc3NQsWUq2sLcQTHxzVj9vDoAyQ/1.usdz)\n\n\n🌐 [T-Pose - FBX](https://ipfs.io/ipfs/QmSWFu6eNbqmsQSSefb6XxcoY7m1rMHGQm3mCf8G4wfguc/1.fbx)"
+}
+
+
+https://ipfs.io/ipfs/QmeP3gk6gyRB55NQ6nyhxdSiZ7S7e4EG9dZpNhcsbvL7A1/343
+
+{
+    "name": "Forest Spirit #343",
+    "image": "ipfs://QmR43AkgZRSCGHgiiBibo6v5JyC31ArgqgC1z1kCvzanWS/343.png",
+    "animation_url": "ipfs://QmSXh1yob3e9a8xuZ7ejiGarSWSp4Wk3P3j43dRyMXo4hp/343.mp4",
+    "attributes": [
+        {
+            "trait_type": "Body",
+            "value": "Carved Yakisugi"
+        },
+        {
+            "trait_type": "Mask",
+            "value": "Shaman of Passing"
+        },
+        {
+            "trait_type": "Staff",
+            "value": "Young Arborist's Staff"
+        },
+        {
+            "trait_type": "Element",
+            "value": "Earth"
+        },
+        {
+            "trait_type": "Pedestal",
+            "value": "Mantis' Basalt"
+        },
+        {
+            "trait_type": "Environment",
+            "value": "Yakisugi Forest"
+        },
+        {
+            "trait_type": "Ancestor",
+            "value": "Bonsai #5736"
+        },
+        {
+            "trait_type": "Origin",
+            "value": "Ancestral Seedling"
+        }
+    ],
+    "profile": "ipfs://QmePtCoqN38cciUqui9MnELkAziyfvqFqTwAU5wNxZrfsw/343.png",
+    "glb": "ipfs://QmbTVt8vrgNjtscCJMsJSn3nrp66aq4H4PSDTdFf4ShEPD/343.glb",
+    "fbx": "ipfs://QmSWFu6eNbqmsQSSefb6XxcoY7m1rMHGQm3mCf8G4wfguc/343.fbx",
+    "usdz": "ipfs://QmNxDdNSC1DtfrMKhfCVc3NQsWUq2sLcQTHxzVj9vDoAyQ/343.usdz",
+    "day": "ipfs://Qme5qA9a4vD5wvsHksB9HVud3LaZaPS7UkHhZDmTQzpg8q/343.png",
+    "night": "ipfs://QmUwxSuUb3A8taAhK5haYraiScMAqtMbLmNEzV8VRSpRkS/343.png",
+    "description": "We are pleased to include the following files with this Forest Spirit:\n\n\n📷 [Profile Picture - PNG](https://ipfs.io/ipfs/QmePtCoqN38cciUqui9MnELkAziyfvqFqTwAU5wNxZrfsw/343.png)\n\n\n🖼 [Hero Art - PNG](https://ipfs.io/ipfs/QmR43AkgZRSCGHgiiBibo6v5JyC31ArgqgC1z1kCvzanWS/343.png)\n\n\n🎬 [Hero Animation - MP4](https://ipfs.io/ipfs/QmSXh1yob3e9a8xuZ7ejiGarSWSp4Wk3P3j43dRyMXo4hp/343.mp4)\n\n\n☀️ [Bonsai Studio Day - PNG](https://ipfs.io/ipfs/Qme5qA9a4vD5wvsHksB9HVud3LaZaPS7UkHhZDmTQzpg8q/343.png)\n\n\n🌙 [Bonsai Studio Night - PNG](https://ipfs.io/ipfs/QmUwxSuUb3A8taAhK5haYraiScMAqtMbLmNEzV8VRSpRkS/343.png)\n\n\n🌐 [Idle Animation - GLB](https://ipfs.io/ipfs/QmbTVt8vrgNjtscCJMsJSn3nrp66aq4H4PSDTdFf4ShEPD/343.glb)\n\n\n🌐 [Idle Animation - USDZ](https://ipfs.io/ipfs/QmNxDdNSC1DtfrMKhfCVc3NQsWUq2sLcQTHxzVj9vDoAyQ/343.usdz)\n\n\n🌐 [T-Pose - FBX](https://ipfs.io/ipfs/QmSWFu6eNbqmsQSSefb6XxcoY7m1rMHGQm3mCf8G4wfguc/343.fbx)"
+}
