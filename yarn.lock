@@ -206,10 +206,10 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.0"
 
-"@graphprotocol/graph-cli@0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.28.0.tgz#7dbd5fd59f30b0c547c23bb4180a4559251e0afa"
-  integrity sha512-a6MLYosEwHEkLzXyuS2IRcB4mp/v2Qtndv5/H8aR6f1f1YbQXd8YfGRIkxl6eZCMDf319nm98wp8Vo+xunYB0w==
+"@graphprotocol/graph-cli@^0.28.0":
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.28.1.tgz#dec94d2fdeb581e9dad57ece1ff7b4eb0e510587"
+  integrity sha512-Tv/XvertW+Ofomk6zSXar9giMVdbe1jXpos1hbINHkNRSLX/2LDswvGUS960TpnmRq6AQD7apSGOOD+O0LWkEg==
   dependencies:
     assemblyscript "0.19.10"
     binary-install-raw "0.0.13"
@@ -237,7 +237,7 @@
     which "2.0.2"
     yaml "1.9.2"
 
-"@graphprotocol/graph-ts@0.26.0":
+"@graphprotocol/graph-ts@^0.26.0":
   version "0.26.0"
   resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.26.0.tgz#576f995531eebaca4374901aeaff499219e382e8"
   integrity sha512-GW/emOJl+35MXgmIxTnUK7dJtPCaB9u5aAwoLVqJ8swogC794O92UrXMVrAJsherUriu+yI9bLMGmNPOIi60jw==

@@ -4,9 +4,9 @@ import { ZERO } from "../utils/constants";
 
 /***** Account functions *****/
 export function get(walletAddress: Address): Account {
-  let account = Account.load(walletAddress.toHexString());
+  let account = Account.load(walletAddress);
   if (!account) {
-    account = new Account(walletAddress.toHexString());
+    account = new Account(walletAddress);
     account.totalBought = ZERO;
     account.totalBoughtWei = ZERO;
     account.avgBoughtWei = ZERO;

@@ -13,7 +13,7 @@ type _Schema_
   )
 
 type Project @entity {
-  id: ID!
+  id: Bytes!
   name: String!
   symbol: String!
   totalMinted: BigInt!
@@ -29,7 +29,7 @@ type Project @entity {
 }
 
 type Account @entity {
-  id: ID!
+  id: Bytes!
   totalBought: BigInt!
   totalBoughtWei: BigInt!
   totalSold: BigInt!
@@ -46,7 +46,7 @@ type Account @entity {
 }
 
 type ForestSpirit @entity {
-  id: ID!
+  id: Bytes!
   project: Project!
   currentOwner: Account!
   totalSales: BigInt!
@@ -73,8 +73,8 @@ type ForestSpirit @entity {
   origin: String
 }
 
-type TransferEvent @entity {
-  id: ID!
+type TransferEvent @entity(immutable: true) {
+  id: Bytes!
   idx: BigInt!
   project: Project!
   nft: ForestSpirit!
@@ -86,8 +86,8 @@ type TransferEvent @entity {
   isMint: Boolean
 }
 
-type SaleEvent @entity {
-  id: ID!
+type SaleEvent @entity(immutable: true) {
+  id: Bytes!
   idx: BigInt!
   project: Project!
   nft: ForestSpirit!

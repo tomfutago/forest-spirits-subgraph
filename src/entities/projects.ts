@@ -5,10 +5,10 @@ import { ZERO } from "../utils/constants";
 
 /***** Project functions *****/
 export function get(contractAddress: Address): Project {
-  let project = Project.load(contractAddress.toHexString());
+  let project = Project.load(contractAddress);
   if (!project) {
     let tokenContract = TokenContract.bind(contractAddress);
-    project = new Project(contractAddress.toHexString());
+    project = new Project(contractAddress);
     project.name = tokenContract.name();
     project.symbol = tokenContract.symbol();
     project.totalMinted = ZERO;

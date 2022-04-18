@@ -12,9 +12,9 @@ import {
 } from "@graphprotocol/graph-ts";
 
 export class Project extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
 
     this.set("name", Value.fromString(""));
     this.set("symbol", Value.fromString(""));
@@ -23,8 +23,8 @@ export class Project extends Entity {
     this.set("totalTransfers", Value.fromBigInt(BigInt.zero()));
     this.set("totalSalesWei", Value.fromBigInt(BigInt.zero()));
     this.set("avgSaleWei", Value.fromBigInt(BigInt.zero()));
-    this.set("buyers", Value.fromStringArray(new Array(0)));
-    this.set("sellers", Value.fromStringArray(new Array(0)));
+    this.set("buyers", Value.fromBytesArray(new Array(0)));
+    this.set("sellers", Value.fromBytesArray(new Array(0)));
   }
 
   save(): void {
@@ -32,25 +32,24 @@ export class Project extends Entity {
     assert(id != null, "Cannot save Project entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save Project entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
+        id.kind == ValueKind.BYTES,
+        `Entities of type Project must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Project", id.toString(), this);
+      store.set("Project", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): Project | null {
-    return changetype<Project | null>(store.get("Project", id));
+  static load(id: Bytes): Project | null {
+    return changetype<Project | null>(store.get("Project", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
   get name(): string {
@@ -116,56 +115,56 @@ export class Project extends Entity {
     this.set("avgSaleWei", Value.fromBigInt(value));
   }
 
-  get nfts(): Array<string> {
+  get nfts(): Array<Bytes> {
     let value = this.get("nfts");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set nfts(value: Array<string>) {
-    this.set("nfts", Value.fromStringArray(value));
+  set nfts(value: Array<Bytes>) {
+    this.set("nfts", Value.fromBytesArray(value));
   }
 
-  get sales(): Array<string> {
+  get sales(): Array<Bytes> {
     let value = this.get("sales");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set sales(value: Array<string>) {
-    this.set("sales", Value.fromStringArray(value));
+  set sales(value: Array<Bytes>) {
+    this.set("sales", Value.fromBytesArray(value));
   }
 
-  get transfers(): Array<string> {
+  get transfers(): Array<Bytes> {
     let value = this.get("transfers");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set transfers(value: Array<string>) {
-    this.set("transfers", Value.fromStringArray(value));
+  set transfers(value: Array<Bytes>) {
+    this.set("transfers", Value.fromBytesArray(value));
   }
 
-  get buyers(): Array<string> {
+  get buyers(): Array<Bytes> {
     let value = this.get("buyers");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set buyers(value: Array<string>) {
-    this.set("buyers", Value.fromStringArray(value));
+  set buyers(value: Array<Bytes>) {
+    this.set("buyers", Value.fromBytesArray(value));
   }
 
-  get sellers(): Array<string> {
+  get sellers(): Array<Bytes> {
     let value = this.get("sellers");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set sellers(value: Array<string>) {
-    this.set("sellers", Value.fromStringArray(value));
+  set sellers(value: Array<Bytes>) {
+    this.set("sellers", Value.fromBytesArray(value));
   }
 }
 
 export class Account extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
 
     this.set("totalBought", Value.fromBigInt(BigInt.zero()));
     this.set("totalBoughtWei", Value.fromBigInt(BigInt.zero()));
@@ -182,25 +181,24 @@ export class Account extends Entity {
     assert(id != null, "Cannot save Account entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save Account entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
+        id.kind == ValueKind.BYTES,
+        `Entities of type Account must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Account", id.toString(), this);
+      store.set("Account", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): Account | null {
-    return changetype<Account | null>(store.get("Account", id));
+  static load(id: Bytes): Account | null {
+    return changetype<Account | null>(store.get("Account", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
   get totalBought(): BigInt {
@@ -275,67 +273,67 @@ export class Account extends Entity {
     this.set("totalReceived", Value.fromBigInt(value));
   }
 
-  get nft(): Array<string> | null {
+  get nft(): Array<Bytes> | null {
     let value = this.get("nft");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toStringArray();
+      return value.toBytesArray();
     }
   }
 
-  set nft(value: Array<string> | null) {
+  set nft(value: Array<Bytes> | null) {
     if (!value) {
       this.unset("nft");
     } else {
-      this.set("nft", Value.fromStringArray(<Array<string>>value));
+      this.set("nft", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
-  get sold(): Array<string> {
+  get sold(): Array<Bytes> {
     let value = this.get("sold");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set sold(value: Array<string>) {
-    this.set("sold", Value.fromStringArray(value));
+  set sold(value: Array<Bytes>) {
+    this.set("sold", Value.fromBytesArray(value));
   }
 
-  get bought(): Array<string> {
+  get bought(): Array<Bytes> {
     let value = this.get("bought");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set bought(value: Array<string>) {
-    this.set("bought", Value.fromStringArray(value));
+  set bought(value: Array<Bytes>) {
+    this.set("bought", Value.fromBytesArray(value));
   }
 
-  get sent(): Array<string> {
+  get sent(): Array<Bytes> {
     let value = this.get("sent");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set sent(value: Array<string>) {
-    this.set("sent", Value.fromStringArray(value));
+  set sent(value: Array<Bytes>) {
+    this.set("sent", Value.fromBytesArray(value));
   }
 
-  get received(): Array<string> {
+  get received(): Array<Bytes> {
     let value = this.get("received");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set received(value: Array<string>) {
-    this.set("received", Value.fromStringArray(value));
+  set received(value: Array<Bytes>) {
+    this.set("received", Value.fromBytesArray(value));
   }
 }
 
 export class ForestSpirit extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
 
-    this.set("project", Value.fromString(""));
-    this.set("currentOwner", Value.fromString(""));
+    this.set("project", Value.fromBytes(Bytes.empty()));
+    this.set("currentOwner", Value.fromBytes(Bytes.empty()));
     this.set("totalSales", Value.fromBigInt(BigInt.zero()));
     this.set("totalSalesWei", Value.fromBigInt(BigInt.zero()));
     this.set("avgSaleWei", Value.fromBigInt(BigInt.zero()));
@@ -355,43 +353,44 @@ export class ForestSpirit extends Entity {
     assert(id != null, "Cannot save ForestSpirit entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save ForestSpirit entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
+        id.kind == ValueKind.BYTES,
+        `Entities of type ForestSpirit must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("ForestSpirit", id.toString(), this);
+      store.set("ForestSpirit", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): ForestSpirit | null {
-    return changetype<ForestSpirit | null>(store.get("ForestSpirit", id));
+  static load(id: Bytes): ForestSpirit | null {
+    return changetype<ForestSpirit | null>(
+      store.get("ForestSpirit", id.toHexString())
+    );
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
-  get project(): string {
+  get project(): Bytes {
     let value = this.get("project");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set project(value: string) {
-    this.set("project", Value.fromString(value));
+  set project(value: Bytes) {
+    this.set("project", Value.fromBytes(value));
   }
 
-  get currentOwner(): string {
+  get currentOwner(): Bytes {
     let value = this.get("currentOwner");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set currentOwner(value: string) {
-    this.set("currentOwner", Value.fromString(value));
+  set currentOwner(value: Bytes) {
+    this.set("currentOwner", Value.fromBytes(value));
   }
 
   get totalSales(): BigInt {
@@ -430,22 +429,22 @@ export class ForestSpirit extends Entity {
     this.set("totalTransfers", Value.fromBigInt(value));
   }
 
-  get sales(): Array<string> {
+  get sales(): Array<Bytes> {
     let value = this.get("sales");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set sales(value: Array<string>) {
-    this.set("sales", Value.fromStringArray(value));
+  set sales(value: Array<Bytes>) {
+    this.set("sales", Value.fromBytesArray(value));
   }
 
-  get transfers(): Array<string> {
+  get transfers(): Array<Bytes> {
     let value = this.get("transfers");
-    return value!.toStringArray();
+    return value!.toBytesArray();
   }
 
-  set transfers(value: Array<string>) {
-    this.set("transfers", Value.fromStringArray(value));
+  set transfers(value: Array<Bytes>) {
+    this.set("transfers", Value.fromBytesArray(value));
   }
 
   get block(): BigInt {
@@ -658,15 +657,15 @@ export class ForestSpirit extends Entity {
 }
 
 export class TransferEvent extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
 
     this.set("idx", Value.fromBigInt(BigInt.zero()));
-    this.set("project", Value.fromString(""));
-    this.set("nft", Value.fromString(""));
-    this.set("from", Value.fromString(""));
-    this.set("to", Value.fromString(""));
+    this.set("project", Value.fromBytes(Bytes.empty()));
+    this.set("nft", Value.fromBytes(Bytes.empty()));
+    this.set("from", Value.fromBytes(Bytes.empty()));
+    this.set("to", Value.fromBytes(Bytes.empty()));
     this.set("block", Value.fromBigInt(BigInt.zero()));
     this.set("hash", Value.fromBytes(Bytes.empty()));
     this.set("timestamp", Value.fromBigInt(BigInt.zero()));
@@ -677,25 +676,26 @@ export class TransferEvent extends Entity {
     assert(id != null, "Cannot save TransferEvent entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save TransferEvent entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
+        id.kind == ValueKind.BYTES,
+        `Entities of type TransferEvent must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("TransferEvent", id.toString(), this);
+      store.set("TransferEvent", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): TransferEvent | null {
-    return changetype<TransferEvent | null>(store.get("TransferEvent", id));
+  static load(id: Bytes): TransferEvent | null {
+    return changetype<TransferEvent | null>(
+      store.get("TransferEvent", id.toHexString())
+    );
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
   get idx(): BigInt {
@@ -707,40 +707,40 @@ export class TransferEvent extends Entity {
     this.set("idx", Value.fromBigInt(value));
   }
 
-  get project(): string {
+  get project(): Bytes {
     let value = this.get("project");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set project(value: string) {
-    this.set("project", Value.fromString(value));
+  set project(value: Bytes) {
+    this.set("project", Value.fromBytes(value));
   }
 
-  get nft(): string {
+  get nft(): Bytes {
     let value = this.get("nft");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set nft(value: string) {
-    this.set("nft", Value.fromString(value));
+  set nft(value: Bytes) {
+    this.set("nft", Value.fromBytes(value));
   }
 
-  get from(): string {
+  get from(): Bytes {
     let value = this.get("from");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set from(value: string) {
-    this.set("from", Value.fromString(value));
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
   }
 
-  get to(): string {
+  get to(): Bytes {
     let value = this.get("to");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set to(value: string) {
-    this.set("to", Value.fromString(value));
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
   }
 
   get block(): BigInt {
@@ -781,16 +781,16 @@ export class TransferEvent extends Entity {
 }
 
 export class SaleEvent extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
 
     this.set("idx", Value.fromBigInt(BigInt.zero()));
-    this.set("project", Value.fromString(""));
-    this.set("nft", Value.fromString(""));
+    this.set("project", Value.fromBytes(Bytes.empty()));
+    this.set("nft", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigInt(BigInt.zero()));
-    this.set("from", Value.fromString(""));
-    this.set("to", Value.fromString(""));
+    this.set("from", Value.fromBytes(Bytes.empty()));
+    this.set("to", Value.fromBytes(Bytes.empty()));
     this.set("block", Value.fromBigInt(BigInt.zero()));
     this.set("hash", Value.fromBytes(Bytes.empty()));
     this.set("timestamp", Value.fromBigInt(BigInt.zero()));
@@ -801,25 +801,26 @@ export class SaleEvent extends Entity {
     assert(id != null, "Cannot save SaleEvent entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save SaleEvent entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
+        id.kind == ValueKind.BYTES,
+        `Entities of type SaleEvent must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("SaleEvent", id.toString(), this);
+      store.set("SaleEvent", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): SaleEvent | null {
-    return changetype<SaleEvent | null>(store.get("SaleEvent", id));
+  static load(id: Bytes): SaleEvent | null {
+    return changetype<SaleEvent | null>(
+      store.get("SaleEvent", id.toHexString())
+    );
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
   get idx(): BigInt {
@@ -831,22 +832,22 @@ export class SaleEvent extends Entity {
     this.set("idx", Value.fromBigInt(value));
   }
 
-  get project(): string {
+  get project(): Bytes {
     let value = this.get("project");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set project(value: string) {
-    this.set("project", Value.fromString(value));
+  set project(value: Bytes) {
+    this.set("project", Value.fromBytes(value));
   }
 
-  get nft(): string {
+  get nft(): Bytes {
     let value = this.get("nft");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set nft(value: string) {
-    this.set("nft", Value.fromString(value));
+  set nft(value: Bytes) {
+    this.set("nft", Value.fromBytes(value));
   }
 
   get amount(): BigInt {
@@ -858,22 +859,22 @@ export class SaleEvent extends Entity {
     this.set("amount", Value.fromBigInt(value));
   }
 
-  get from(): string {
+  get from(): Bytes {
     let value = this.get("from");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set from(value: string) {
-    this.set("from", Value.fromString(value));
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
   }
 
-  get to(): string {
+  get to(): Bytes {
     let value = this.get("to");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set to(value: string) {
-    this.set("to", Value.fromString(value));
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
   }
 
   get block(): BigInt {

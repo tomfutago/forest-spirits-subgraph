@@ -5,7 +5,7 @@ import { ZERO, IPFS_HASH } from "../utils/constants";
 
 /***** NFT functions *****/
 export function get(
-  id: string,
+  id: Bytes,
   contractAddress: Address,
   tokenID: BigInt,
   block: BigInt,
@@ -16,7 +16,7 @@ export function get(
   let spirit = ForestSpirit.load(id);
   if (!spirit) {
     spirit = new ForestSpirit(id);
-    spirit.project = contractAddress.toHexString();
+    spirit.project = contractAddress;
     spirit.tokenID = tokenID;
     spirit.block = block;
     spirit.hash = hash;
@@ -93,7 +93,7 @@ export function get(
       }
     }
   }
-  spirit.currentOwner = walletAddress.toHexString();
+  spirit.currentOwner = walletAddress;
   spirit.save();
 
   return spirit as ForestSpirit;

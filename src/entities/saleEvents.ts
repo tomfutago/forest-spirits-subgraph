@@ -13,9 +13,7 @@ export function create(
   timestamp: BigInt
 ): void {
   // new sales event
-  let saleId = nft.id
-    .concat("/")
-    .concat(nft.totalSales.toString());
+  let saleId = nft.id.concatI32(nft.totalSales.toI32());
 
   let sale = new SaleEvent(saleId);
 

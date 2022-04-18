@@ -1,3 +1,4 @@
+import { Bytes } from "@graphprotocol/graph-ts";
 import { Transfer as TransferEvent } from "../generated/Token/Token";
 import { ForestSpirit, Project } from "../generated/schema";
 import { ZERO, ZERO_ADDRESS } from "./utils/constants";
@@ -21,7 +22,7 @@ export function handleTransfer(event: TransferEvent): void {
   /***** Project *****/
   let project = projects.get(address);
   // sale
-  if (from.toHexString() != ZERO_ADDRESS) {
+  if (from != ZERO_ADDRESS) {
     let seller = accounts.get(from);
     let buyer = accounts.get(to);
     projects.addSeller(project as Project, seller);
@@ -35,7 +36,7 @@ export function handleTransfer(event: TransferEvent): void {
   
   /***** NFT *****/
   let spirit = nfts.get(
-    tokenId.toString(),
+    Bytes.fromI32(tokenId.toI32()),
     address,
     tokenId,
     block,
@@ -45,7 +46,7 @@ export function handleTransfer(event: TransferEvent): void {
   );
 
   /***** Sale Event *****/
-  if (from.toHexString() != ZERO_ADDRESS && amount.gt(ZERO)) {
+  if (from != ZERO_ADDRESS && amount.gt(ZERO)) {
     saleEvents.create(
       spirit as ForestSpirit,
       project as Project,

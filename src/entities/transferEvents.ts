@@ -12,9 +12,7 @@ export function create(
   timestamp: BigInt
 ): void {
   /* Record the new transfer event */
-  let transferId = nft.id
-    .concat("/")
-    .concat(nft.totalTransfers.toString());
+  let transferId = nft.id.concatI32(nft.totalTransfers.toI32());
 
   let transfer = new TransferEvent(transferId);
 
